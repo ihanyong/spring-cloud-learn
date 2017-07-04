@@ -1,0 +1,28 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: provider-user
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    org.hibernate.typedescriptor.sql.BasicBinder: trace
+    org.hibernate.typedescriptor.sql.BasicExtractor: trace
+    com.itmuch.youran.persistence: error
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
