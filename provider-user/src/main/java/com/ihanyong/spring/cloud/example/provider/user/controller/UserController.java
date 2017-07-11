@@ -5,8 +5,10 @@ package com.ihanyong.spring.cloud.example.provider.user.controller;/**
 import com.ihanyong.spring.cloud.example.provider.user.dao.User;
 import com.ihanyong.spring.cloud.example.provider.user.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2017/6/12
  */
 @RestController
+@RefreshScope
 public class UserController {
 
     @Autowired private DiscoveryClient discoveryClient;
     @Autowired private UserRepository userRepository;
 
+    @Value("${test.name}")
+    private String name;
+    @Value("${test.pwd}")
+    private String pwd;
+
+    @GetMapping("/name/get")
+    public String getName() {
+        return name;
+    }
+    @GetMapping("/pwd/get")
+    public String getPwd() {
+        return pwd;
+    }
+
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Long id) {
+
         User user = userRepository.findOne(id);
         return user;
     }
