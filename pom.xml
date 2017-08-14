@@ -17,6 +17,7 @@
         <module>consumer-user-robbin-with-hystrix</module>
         <module>hystrix-dashboard</module>
         <module>turbine</module>
+        <module>config-server</module>
     </modules>
 
     <parent>
@@ -37,5 +38,22 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
